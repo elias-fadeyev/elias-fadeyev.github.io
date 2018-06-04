@@ -23,15 +23,15 @@ class Game {
   
   render() {
     this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.player.renderImage(this.canvasContext);   
+    this.player.renderImage(this.canvas, this.canvasContext);   
     window.requestAnimationFrame(this.render.bind(this));  
   }
   
   init() { 
-    const playerStartPosition = [0, 0];
+    const playerStartPosition = [100, (this.canvas.height / 2 - 50)];
     const currentState = heroStates.get('stay');
 
-    this.player = new Player('Hero', 'Scrooge', 'images/sprite.png', playerStartPosition, currentState, currentState.imageSize[0], currentState.imageSize[1], currentState.firstSpritePosition);
+    this.player = new Player('Hero', 'Scrooge', 'images/sprite.png', playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.firstSpritePosition);
     document.addEventListener('keydown', this.player.move.bind(this.player));
     document.addEventListener('keyup', this.player.stop.bind(this.player));
 
