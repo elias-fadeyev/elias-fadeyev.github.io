@@ -1,9 +1,13 @@
 import Character from './character';
+import { heroStates } from './data';
 
 export default class Player extends Character {
   constructor(...args) {
     super(...args);
+    this.speed = 300;
+    this.animationDelay = 2000;
     this.pressedButtons = {'up': false, 'right': false, 'down': false, 'left': false, 'amount': 0};
+    this.healthPoints = 100;
   }
   
   renderImage(canvas, ctx) {
@@ -26,7 +30,7 @@ export default class Player extends Character {
     super.renderImage(canvas, ctx);
   }
 
-  move(e) {
+  handleInput(e) {
     const keyCode = e.keyCode;
     const buttonDirection = this.getButtonDirection(keyCode);
 
@@ -55,7 +59,7 @@ export default class Player extends Character {
   }
 
   getImageShiftX() {
-    let shiftX = this.speed;
+    let shiftX = this.speed * this.renderingInterval / 1000;
 
     if (this.pressedButtons['left']) {
       shiftX = -shiftX;
@@ -64,14 +68,14 @@ export default class Player extends Character {
     if (!this.pressedButtons['left'] && !this.pressedButtons['right']) {
       return 0;
     } else if (this.pressedButtons['up'] || this.pressedButtons['down']) {
-      return shiftX / 2;
+      return shiftX / Math.sqrt(2);
     } else {
       return shiftX;
     } 
   }
 
   getImageShiftY() {
-    let shiftY = this.speed;
+    let shiftY = this.speed * this.renderingInterval / 1000;
     if (this.pressedButtons['up']) {
       shiftY = -shiftY;
     }
@@ -79,13 +83,13 @@ export default class Player extends Character {
     if (!this.pressedButtons['up'] && !this.pressedButtons['down']) {
       return 0;
     } else if (this.pressedButtons['left'] || this.pressedButtons['right']) {
-      return shiftY / 2;
+      return shiftY / Math.sqrt(2);
     } else {
       return shiftY;
     } 
   }
 
-  stop(e) {
+  stopHadnleInput(e) {
     const keyCode = e.keyCode;
     const buttonDirection = this.getButtonDirection(keyCode);
     if (keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40) {
@@ -97,5 +101,11 @@ export default class Player extends Character {
   removePressedButtons(buttonDirection) {
     this.pressedButtons.amount -= 1;
     this.pressedButtons[buttonDirection] = false;
+  }
+  
+  setState(state) {
+    this.state = heroStates.get(state);
+    
+    super.setState(this.state);
   }
 }
