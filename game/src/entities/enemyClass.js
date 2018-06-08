@@ -1,11 +1,10 @@
-import Character from './character';
+import Character from './characterClass';
 
 export default class Enemy extends Character {
   constructor(...args) {
     super(...args);
     this.imageReverse = true;
     this.spriteDirectionChangeable = true;
-    this.animationDelay = 1500;
     this.healthPoints = 100;
   }
 
@@ -27,8 +26,7 @@ export default class Enemy extends Character {
     this.framesAmount = bodyPart.framesAmount;
     
     this.setImagePosition(dx, dy);
-    super.renderImage(canvas, ctx);
-    
+    super.renderImage(canvas, ctx);    
     this.setImagePosition(-dx, -dy);
   }
 }

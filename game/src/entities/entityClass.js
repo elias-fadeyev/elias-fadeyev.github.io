@@ -1,15 +1,16 @@
-export default class Sprite {
-  constructor(url, imageWidth, imageHeight, imagePosition, spritePosition, framesAmount) {
+export default class Entity {
+  constructor(url, imageWidth, imageHeight, imagePosition, spritePosition, animationDelay = 0, framesAmount = 1) {
     this.url = url;
     this.imageWidth = imageWidth;
     this.imageHeight = imageHeight;
     this.imagePosition = imagePosition;
     this.spritePosition = spritePosition;
     this.imageReverse = false;
+    this.framesPerSecond = 15;
     this.startWaitingTime = Date.now();
     this.delayInterval = 0;
-    this.animationDelay = 1000;
-    this.renderingInterval = 0;
+    this.animationDelay = animationDelay;
+    this.animationTime = 0;
     this.lastRenderingTime = Date.now();
     this.framesAmount = framesAmount;
     this.spriteDirectionReverse = false;
@@ -21,10 +22,10 @@ export default class Sprite {
     img.src = this.url;
     
     this.delayInterval = this.getTimeInterval(this.startWaitingTime, Date.now());
-    this.renderingInterval = this.getTimeInterval(this.lastRenderingTime, Date.now());
       
     if (this.isAnimationStarted() && this.isFramesCycling()) {
-      this.setSpritePosition();
+        this.animationTime = this.getTimeInterval(this.lastRenderingTime + this.animationDelay, Date.now());
+        this.setSpritePosition();
     }
     ctx.save();
     if (this.imageReverse) {
@@ -37,14 +38,10 @@ export default class Sprite {
       this.imageWidth, this.imageHeight
     );
     ctx.restore();
-    this.lastRenderingTime = Date.now();
   }
   
   isAnimationStarted() {
-    if (this.stateAction === 'stay') {
-      return this.delayInterval >= this.animationDelay;
-    }
-    return this.delayInterval > 0;
+    return this.delayInterval > this.animationDelay;
   }
   
   isImageReverse(dx) {
@@ -82,12 +79,12 @@ export default class Sprite {
   
   setSpritePosition() {
     if (!this.spriteDirectionReverse) {
-      this.spritePosition[0] += this.state.spriteSize[0];
+      this.spritePosition[0] = this.state.spriteSize[0] * Math.floor(this.framesPerSecond * this.animationTime / 1000);    
     } else {
-      this.spritePosition[0] -= this.state.spriteSize[0];
+      this.spritePosition[0] = this.state.spriteSize[0] * (this.framesAmount - Math.ceil(this.framesPerSecond * this.animationTime / 1000));      
     }
     
-    if (this.isFramesCycleEnded()) {
+    if (this.isFramesCycleEnded()) {  
       if (!this.spriteDirectionReverse && this.spriteDirectionChangeable || this.spriteDirectionReverse && !this.spriteDirectionChangeable) {
         this.spritePosition[0] = this.state.spriteSize[0] * (this.framesAmount - 1);
       } else {
@@ -99,6 +96,7 @@ export default class Sprite {
       }
       
       this.startWaitingTime = Date.now();
+      this.lastRenderingTime = Date.now();
     }
   }
 
@@ -107,7 +105,7 @@ export default class Sprite {
   }
 
   isFramesCycleEnded() {
-    return this.spritePosition[0] >= (this.state.spriteSize[0] * this.framesAmount) || this.spritePosition[0] <= 0;
+    return this.spritePosition[0] >= (this.state.spriteSize[0] * this.framesAmount) || this.spritePosition[0] < 0;
   }
 
   getTimeInterval(startTime, endTime) {

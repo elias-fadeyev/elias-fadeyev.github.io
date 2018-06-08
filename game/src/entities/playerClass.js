@@ -1,11 +1,10 @@
-import Character from './character';
-import { heroStates } from './data';
+import Character from './characterClass';
+import { heroStates } from './../constants';
 
 export default class Player extends Character {
   constructor(...args) {
     super(...args);
-    this.speed = 300;
-    this.animationDelay = 2000;
+    this.speed = 6;
     this.pressedButtons = {'up': false, 'right': false, 'down': false, 'left': false, 'amount': 0};
     this.healthPoints = 100;
   }
@@ -59,7 +58,7 @@ export default class Player extends Character {
   }
 
   getImageShiftX() {
-    let shiftX = this.speed * this.renderingInterval / 1000;
+    let shiftX = this.speed;
 
     if (this.pressedButtons['left']) {
       shiftX = -shiftX;
@@ -75,7 +74,7 @@ export default class Player extends Character {
   }
 
   getImageShiftY() {
-    let shiftY = this.speed * this.renderingInterval / 1000;
+    let shiftY = this.speed;
     if (this.pressedButtons['up']) {
       shiftY = -shiftY;
     }
@@ -89,7 +88,7 @@ export default class Player extends Character {
     } 
   }
 
-  stopHadnleInput(e) {
+  stopHandleInput(e) {
     const keyCode = e.keyCode;
     const buttonDirection = this.getButtonDirection(keyCode);
     if (keyCode === 37 || keyCode === 38 || keyCode === 39 || keyCode === 40) {
