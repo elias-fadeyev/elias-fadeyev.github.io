@@ -9,7 +9,7 @@ export default class Player extends Character {
     this.healthPoints = 100;
   }
   
-  renderImage(canvas, ctx) {
+  renderImage() {
     if (this.pressedButtons.amount > 0) {      
       const imageShiftX = this.getImageShiftX();
       const imageShiftY = this.getImageShiftY();
@@ -20,13 +20,13 @@ export default class Player extends Character {
         this.setState('run');
       }
       
-      const maxWidth = canvas.width;
-      const maxHeight = canvas.height;
+      const maxWidth = this.canvas.width;
+      const maxHeight = this.canvas.height;
       
       this.setImagePosition(imageShiftX, imageShiftY, maxWidth, maxHeight);
     }
   
-    super.renderImage(canvas, ctx);
+    super.renderImage();
   }
 
   handleInput(e) {
@@ -100,6 +100,14 @@ export default class Player extends Character {
   removePressedButtons(buttonDirection) {
     this.pressedButtons.amount -= 1;
     this.pressedButtons[buttonDirection] = false;
+  }
+
+  clearCache() {
+    this.pressedButtons['up'] = false;
+    this.pressedButtons['right'] = false;
+    this.pressedButtons['down'] = false;
+    this.pressedButtons['left'] = false;
+    this.pressedButtons.amount = 0;
   }
   
   setState(state) {

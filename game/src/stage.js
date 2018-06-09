@@ -13,20 +13,23 @@ export default class Stage {
     this.mode.render();
 
     if (this.mode.isFinished()) {
+      this.player.clearCache();
+      this.mode.removeHandlers();
       this.mode = this.mode.getNext();
+      this.mode.init();
     }
 
     window.requestAnimationFrame(this.render.bind(this));
   }
 
   init() {
-    const enemyStartPosition = [(this.canvas.width - 200), (this.canvas.height / 2 + 40)];
+    const enemyStartPosition = [(this.canvas.width - getRandomNumber(300, 200)), (this.canvas.height - getRandomNumber(200, 150))];
     const enemyAppearance = getRandomData(enemyAppearances);
     const currentEnemyState = enemyStates.get('stay');
     const enemyPartWidth = currentEnemyState.imageSize[0];
     const enemyPartHeight = currentEnemyState.imageSize[1];
 
-    this.monster = new Enemy(getRandomData(enemyNames), enemyAppearance, 'images/enemy-sprite.png', enemyStartPosition, currentEnemyState, currentEnemyState.action, enemyPartWidth, enemyPartHeight, currentEnemyState.animationDelay);
+    this.monster = new Enemy(getRandomData(enemyNames), enemyAppearance, this.canvas, 'images/enemy-sprite.png', enemyStartPosition, currentEnemyState, currentEnemyState.action, enemyPartWidth, enemyPartHeight, currentEnemyState.animationDelay);
 
     this.mode = new Travel(this.canvas, this.player, this.monster);
     this.mode.init();

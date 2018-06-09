@@ -1,7 +1,7 @@
 export { getRandomNumber, getRandomData};
 
-function getRandomNumber(amount) {
-  return Math.floor(Math.random() * amount);
+function getRandomNumber(last, first = 0) {
+  return first + Math.floor(Math.random() * (last - first));
 }
 
 function getRandomData(dataObject) {

@@ -12,7 +12,7 @@ class Game {
     const playerStartPosition = [100, (this.canvas.height / 2)];
     const currentState = heroStates.get('stay');
 
-    this.player = new Player('Hero', 'Scrooge', 'images/sprite.png', playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.firstSpritePosition, currentState.framesAmount, currentState.animationDelay);
+    this.player = new Player('Hero', 'Scrooge', this.canvas, 'images/sprite.png', playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.firstSpritePosition, currentState.framesAmount, currentState.animationDelay);
 
     this.stage = new Stage(this.canvas, this.player);
     this.stage.init();

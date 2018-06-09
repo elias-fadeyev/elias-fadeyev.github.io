@@ -1,0 +1,52 @@
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(100, 100, 100, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-header {
+  font-size: 30px;
+  color: gold;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: gold;
+  background-color: #00f;
+  font-size: 20px;
+}
+
+.nav-item {
+  padding: 10px 30px;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  background-color: #55f;
+}

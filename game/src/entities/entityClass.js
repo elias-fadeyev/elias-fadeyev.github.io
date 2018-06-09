@@ -1,5 +1,7 @@
 export default class Entity {
-  constructor(url, imageWidth, imageHeight, imagePosition, spritePosition, animationDelay = 0, framesAmount = 1) {
+  constructor(canvas, url, imageWidth, imageHeight, imagePosition, spritePosition, animationDelay = 0, framesAmount = 1) {
+    this.canvas = canvas;
+    this.canvasContext = this.canvas.getContext('2d');
     this.url = url;
     this.imageWidth = imageWidth;
     this.imageHeight = imageHeight;
@@ -8,7 +10,6 @@ export default class Entity {
     this.imageReverse = false;
     this.framesPerSecond = 15;
     this.startWaitingTime = Date.now();
-    this.delayInterval = 0;
     this.animationDelay = animationDelay;
     this.animationTime = 0;
     this.lastRenderingTime = Date.now();
@@ -17,7 +18,7 @@ export default class Entity {
     this.spriteDirectionChangeable = false;
   }
   
-  renderImage(canvas, ctx) {
+  renderImage() {
     const img = new Image();
     img.src = this.url;
     
@@ -27,17 +28,17 @@ export default class Entity {
         this.animationTime = this.getTimeInterval(this.lastRenderingTime + this.animationDelay, Date.now());
         this.setSpritePosition();
     }
-    ctx.save();
+    this.canvasContext.save();
     if (this.imageReverse) {
-      ctx.scale(-1, 1);
+      this.canvasContext.scale(-1, 1);
     }
-    ctx.drawImage(img, 
+    this.canvasContext.drawImage(img, 
       this.spritePosition[0], this.spritePosition[1], 
       this.state.spriteSize[0], this.state.spriteSize[1], 
       this.getImageXPosition(), this.imagePosition[1], 
       this.imageWidth, this.imageHeight
     );
-    ctx.restore();
+    this.canvasContext.restore();
   }
   
   isAnimationStarted() {

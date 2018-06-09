@@ -11,7 +11,12 @@ export default class Travel extends Mode {
     this.player.handleInput = this.player.handleInput.bind(this.player);
     this.player.stopHandleInput = this.player.stopHandleInput.bind(this.player);
   }
-  
+
+  removeHandlers() {
+    document.removeEventListener('keydown', this.player.handleInput);
+    document.removeEventListener('keyup', this.player.stopHandleInput);
+  }
+
   isFinished() {
     const playerLeft = this.player.imagePosition[0];
     const playerRight = this.player.imagePosition[0] + this.player.imageWidth;

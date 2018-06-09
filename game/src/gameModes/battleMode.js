@@ -1,4 +1,7 @@
 import Mode from './mode';
+import { Navigation } from '../navigation'
+import { toASCII } from 'punycode';
+import { Travel } from '.';
 
 export default class Battle extends Mode {
   render() {
@@ -17,10 +20,19 @@ export default class Battle extends Mode {
     
     if (this.isPlayerTurn()) {
       this.player.setState('aim');
+      if (!this.spellNav) {
+        const links = ['Удар', 'Лечение'];
+        this.spellNav = new Navigation('Выбери заклинание:', links);
+        this.spellNav.init();
+      }
+
+      if (this.spellNav.isSelected) {
+        this.getNext();
+      }
     }
     
-    this.player.renderImage(this.canvas, this.canvasContext); 
-    this.monster.renderImage(this.canvas, this.canvasContext); 
+    this.player.renderImage(); 
+    this.monster.renderImage(); 
 
     
     window.requestAnimationFrame(this.render.bind(this));  
@@ -43,5 +55,25 @@ export default class Battle extends Mode {
   
   isPlayerTurn() {
     return true;
+  }
+
+  isFinished() {
+    if (this.monster.healthPoints === 0 || this.player.healthPoints === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  getNext() {
+    if (!this.isFinished) {
+      return new Task();
+    }
+
+    return new Travel();
+  }
+
+  init() {
+    this.player.imagePosition = [150, (this.canvas.height / 2)];
+    this.monster.imagePosition = [(this.canvas.width - 200), (this.canvas.height / 2 + 47)];
   }
 }
