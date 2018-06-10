@@ -6,6 +6,7 @@ export const heroStates = new Map([
     'firstSpritePosition': [0, 0],
     'framesAmount': 7,	
     'animationDelay': 2000,
+    'repeat': true,
 	}],
   ['run', {
     'action': 'run',
@@ -14,6 +15,7 @@ export const heroStates = new Map([
     'firstSpritePosition': [0, 185],
     'framesAmount': 14,	
     'animationDelay': 0,
+    'repeat': true,
   }],
   ['aim', {
     'action': 'aim',
@@ -22,6 +24,7 @@ export const heroStates = new Map([
     'firstSpritePosition': [0, 370],
     'framesAmount': 12,	
     'animationDelay': 0,
+    'repeat': true,
   }],
   ['hit', {
     'action': 'hit',
@@ -30,6 +33,16 @@ export const heroStates = new Map([
     'firstSpritePosition': [0, 555],
     'framesAmount': 8,	
     'animationDelay': 0,
+    'repeat': false,
+  }],
+  ['miss', {
+    'action': 'miss',
+    'imageSize': [95, 95],
+    'spriteSize': [185, 185],
+    'firstSpritePosition': [0, 740],
+    'framesAmount': 12,	
+    'animationDelay': 0,
+    'repeat': false,
   }],
 ]);
 

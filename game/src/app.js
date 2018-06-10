@@ -11,8 +11,9 @@ class Game {
   startGame() {
     const playerStartPosition = [100, (this.canvas.height / 2)];
     const currentState = heroStates.get('stay');
+    const healthPoints = 100;
 
-    this.player = new Player('Hero', 'Scrooge', this.canvas, 'images/sprite.png', playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.firstSpritePosition, currentState.framesAmount, currentState.animationDelay);
+    this.player = new Player('Hero', 'Scrooge', healthPoints, this.canvas, 'images/hero-sprite.png', playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.firstSpritePosition, currentState.framesAmount, currentState.animationDelay,  currentState.repeat);
 
     this.stage = new Stage(this.canvas, this.player);
     this.stage.init();
@@ -29,4 +30,4 @@ img.addEventListener('load', () => {
   const game = new Game(canvas);
   game.init();
 })
-img.src = 'images/sprite.png';
+img.src = 'images/hero-sprite.png';

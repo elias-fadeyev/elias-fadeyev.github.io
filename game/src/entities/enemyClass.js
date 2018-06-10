@@ -5,7 +5,7 @@ export default class Enemy extends Character {
     super(...args);
     this.imageReverse = true;
     this.spriteDirectionChangeable = true;
-    this.healthPoints = 100;
+    this.maxHealth = this.healthPoints;
   }
 
   getFullName() {

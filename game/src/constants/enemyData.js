@@ -12,6 +12,7 @@ const enemyNames = new Map([
     'imageSize': [75, 75],
     'spriteSize': [150, 150],
     'animationDelay': 1500,
+    'repeat': true,
 	}],
 ]);
 

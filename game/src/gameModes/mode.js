@@ -4,6 +4,7 @@ export default class Mode {
     this.canvasContext = this.canvas.getContext('2d');
     this.player = player;
     this.monster = monster;
+    this.hasHandlers = false;
   }
 
   render() {

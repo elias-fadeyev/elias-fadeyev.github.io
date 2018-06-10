@@ -1,4 +1,4 @@
-.nav-wrapper {
+.task-wrapper {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -12,8 +12,9 @@
   align-items: center;
 }
 
-.nav {
+.task-block {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -22,16 +23,14 @@
   padding: 0;
 }
 
-.nav-header {
+.task-header {
   font-size: 30px;
   padding: 20px;
   color: gold;
 }
 
-.nav-list {
-  list-style: none;
+.task-text {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: stretch;
   text-align: center;
@@ -41,10 +40,37 @@
   font-size: 20px;
 }
 
-.nav-item {
-  padding: 10px 30px;
+.solution-input {
+  width: 50px;
+  margin: 0 10px;
+  text-align: center;
+  border: none;
+  font-size: 18px;
 }
 
-.nav-item:hover {
-  cursor: pointer;
+.solution-correct,
+.solution-wrong {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  top: 100%;
+  padding: 10px;
+}
+
+.solution-correct {
+  color:#080;
+}
+
+.solution-wrong {
+  color:#d00;
+}
+
+.correct {
+  background-color: #080;
+  color: #fff;
+}
+
+.wrong {
+  background-color: #d00;
+  color: #fff;
 }

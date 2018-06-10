@@ -6,7 +6,7 @@ export default class Player extends Character {
     super(...args);
     this.speed = 6;
     this.pressedButtons = {'up': false, 'right': false, 'down': false, 'left': false, 'amount': 0};
-    this.healthPoints = 100;
+    this.maxHealth = 100;
   }
   
   renderImage() {

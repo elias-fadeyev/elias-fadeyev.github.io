@@ -1,5 +1,5 @@
 export default class Entity {
-  constructor(canvas, url, imageWidth, imageHeight, imagePosition, spritePosition, animationDelay = 0, framesAmount = 1) {
+  constructor(canvas, url, imageWidth, imageHeight, imagePosition, spritePosition, animationDelay = 0, framesAmount = 1, spriteRepeat = true) {
     this.canvas = canvas;
     this.canvasContext = this.canvas.getContext('2d');
     this.url = url;
@@ -16,6 +16,7 @@ export default class Entity {
     this.framesAmount = framesAmount;
     this.spriteDirectionReverse = false;
     this.spriteDirectionChangeable = false;
+    this.spriteRepeat = spriteRepeat;
   }
   
   renderImage() {
@@ -85,7 +86,7 @@ export default class Entity {
       this.spritePosition[0] = this.state.spriteSize[0] * (this.framesAmount - Math.ceil(this.framesPerSecond * this.animationTime / 1000));      
     }
     
-    if (this.isFramesCycleEnded()) {  
+    if (this.isFramesCycleEnded() && this.spriteRepeat) {
       if (!this.spriteDirectionReverse && this.spriteDirectionChangeable || this.spriteDirectionReverse && !this.spriteDirectionChangeable) {
         this.spritePosition[0] = this.state.spriteSize[0] * (this.framesAmount - 1);
       } else {

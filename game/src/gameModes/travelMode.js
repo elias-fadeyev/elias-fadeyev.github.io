@@ -5,6 +5,8 @@ export default class Travel extends Mode {
   addHandlers() {
 		document.addEventListener('keydown', this.player.handleInput);
     document.addEventListener('keyup', this.player.stopHandleInput);
+
+    this.hasHandlers = true;
 	}
 
   bindThis() {
@@ -15,6 +17,10 @@ export default class Travel extends Mode {
   removeHandlers() {
     document.removeEventListener('keydown', this.player.handleInput);
     document.removeEventListener('keyup', this.player.stopHandleInput);
+
+    this.hasHandlers = false;
+
+    this.player.clearCache();
   }
 
   isFinished() {

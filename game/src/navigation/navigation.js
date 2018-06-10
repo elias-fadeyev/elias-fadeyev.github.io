@@ -24,12 +24,21 @@ export default class Navigation {
 
     if (!selectedElement) return;
 
-    const targetId = target.getAttribute('data-index');
+    this.targetId = target.dataset.id;
 
     this.removeHandlers();
     this.component.remove();
+  }
 
-    return targetId;
+  getTargetId() {
+    return this.targetId;
+  }
+
+  isSelected() {
+    if (!this.targetId) {
+      return false;
+    }
+    return true;
   }
 
   render() {
