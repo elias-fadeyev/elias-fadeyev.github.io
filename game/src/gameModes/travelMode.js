@@ -28,17 +28,25 @@ export default class Travel extends Mode {
     const playerRight = this.player.imagePosition[0] + this.player.imageWidth;
     const playerTop = this.player.imagePosition[1];
     const playerBottom = this.player.imagePosition[1] + this.player.imageHeight;
-    
-    const monsterLeft = this.monster.imagePosition[0];
-    const monsterRight = this.monster.imagePosition[0] + this.monster.imageWidth;
-    const monsterTop = this.monster.imagePosition[1];
-    const monsterBottom = this.monster.imagePosition[1] + this.monster.imageHeight;
 
-    return (!(playerRight < monsterLeft || playerLeft > monsterRight) && !(playerTop > (monsterBottom - 100) || playerBottom < (monsterTop + 30)));
+    this.enemies.forEach(monster => {
+      const monsterLeft = monster.imagePosition[0];
+      const monsterRight = monster.imagePosition[0] + monster.imageWidth;
+      const monsterTop = monster.imagePosition[1];
+      const monsterBottom = monster.imagePosition[1] + monster.imageHeight;
+
+      if (!(playerRight < monsterLeft || playerLeft > monsterRight) && !(playerTop > (monsterBottom - 100) || playerBottom < (monsterTop + 30))) {
+        this.attackedMonster = monster;
+      }
+    })
+
+    return (this.attackedMonster);
   }
 
   getNext() {
-    return new Battle(this.canvas, this.player, this.monster);
+    const attackedMonster = this.attackedMonster;
+    this.attackedMonster = null;
+    return new Battle(this.canvas, this.player, attackedMonster);
   }
 
   init() {

@@ -7,6 +7,8 @@ export default class Player extends Character {
     this.speed = 6;
     this.pressedButtons = {'up': false, 'right': false, 'down': false, 'left': false, 'amount': 0};
     this.maxHealth = 100;
+
+    this.time = Date.now();
   }
   
   renderImage() {
@@ -19,11 +21,21 @@ export default class Player extends Character {
       if (this.stateAction !== 'run') {
         this.setState('run');
       }
+
+      if (Date.now() - this.time > 550) {
+        const audio = new Audio('audio/step.wav');
+        audio.volume = 0.4;
+        audio.play();
+
+        this.time = Date.now();
+      }
       
       const maxWidth = this.canvas.width;
       const maxHeight = this.canvas.height;
+      const minWidth = 0;
+      const minHeight = 220;
       
-      this.setImagePosition(imageShiftX, imageShiftY, maxWidth, maxHeight);
+      this.setImagePosition(imageShiftX, imageShiftY, maxWidth, maxHeight, minWidth, minHeight);
     }
   
     super.renderImage();

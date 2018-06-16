@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+}
+
+.task-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(100, 100, 100, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-block {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.task-header {
+  font-size: 30px;
+  padding: 10px;
+  color: #ffd700;
+}
+
+.task-text {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: #ffd700;
+  font-size: 20px;
+}
+
+.solution-input {
+  margin: 0 10px;
+  text-align: center;
+  border: none;
+  font-size: 18px;
+}
+
+.num-solution-input {
+  width: 50px;
+}
+
+.text-solution-input {
+  width: 150px;
+}
+
+.solution-correct,
+.solution-wrong {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  top: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.solution-correct {
+  color:#080;
+}
+
+.solution-wrong {
+  color:#d00;
+}
+
+.word-field {
+  border: 5px solid #ffd700;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.word-field.correct {
+  border: 5px solid #080;
+}
+
+.word-field.wrong {
+  border: 5px solid #d00;
+}
+
+.letter {
+  position: absolute;
+  background-color: #ffd700;
+  border: 0.1px solid #aaa;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.letter:hover {
+  border: 0.1px solid #000;
+}
+
+.word-field.correct .letter,
+.word-field.wrong .letter {
+  border: none;
+}
+
+.letter:hover {
+  cursor: pointer;
+}
+
+.cancel-button {
+  margin: 20px;
+  color: #ffd700;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.cancel-button:hover {
+  cursor: pointer;
+  color: #f00;
+}
+
+.decimal, 
+.choice-button {
+  margin: 0;
+  padding: 10px 30px;
+  color: #ffd700;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.decimal:focus,
+.choice-button:focus {
+  background-color: #aaa;
+}
+
+.task-word {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+  text-align: center;
+  font-weight: bold;
+  color: #ffd700;
+  font-size: 22px;
+}
+
+.correct,
+.decimal.correct,
+.choice-button.correct {
+  background-color: #080;
+  color: #fff;
+}
+
+.wrong,
+.decimal.wrong,
+.choice-button.wrong {
+  background-color: #d00;
+  color: #fff;
+}

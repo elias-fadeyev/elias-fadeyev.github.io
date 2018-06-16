@@ -1,8 +1,8 @@
 import Entity from './entityClass';
 
 export default class Character extends Entity {
-  constructor (name, appearance, healthPoints, canvas, url, imagePosition, state, stateAction, imageWidth, imageHeight, animationDelay, spritePosition, framesAmount, spriteRepeat) {
-    super(canvas, url, imageWidth, imageHeight, imagePosition, spritePosition, animationDelay, framesAmount, spriteRepeat);
+  constructor (name, appearance, healthPoints, canvas, url, imagePosition, state, stateAction, imageWidth, imageHeight, animationDelay, spriteRepeat, spriteSize, spritePosition, framesAmount) {
+    super(canvas, url, imageWidth, imageHeight, imagePosition, spriteSize, spritePosition, animationDelay, framesAmount, spriteRepeat);
     this.name = name;
     this.appearance = appearance;
     this.state = state;
@@ -15,10 +15,11 @@ export default class Character extends Entity {
       return;
     }
     this.stateAction = state.action;
-    this.spritePosition = state.firstSpritePosition.slice();
-    this.framesAmount = state.framesAmount;
     this.imageWidth = state.imageSize[0];
     this.imageHeight = state.imageSize[1];
+    this.spritePosition = state.firstSpritePosition.slice();
+    this.spriteSize = state.spriteSize.slice();
+    this.framesAmount = state.framesAmount;
     this.animationDelay = state.animationDelay;
     this.spriteRepeat = state.repeat;
     if (this.spriteRepeat) {
@@ -28,24 +29,27 @@ export default class Character extends Entity {
     }
   }
 
-  setSpritePosition() {
-    super.setSpritePosition();
+  // changeSpritePosition() {
+  //   super.changeSpritePosition();
 
-    if (this.isFramesCycleEnded() && !this.spriteRepeat) {
-      this.setState('stay');
-    }
-  }
+  //   if (this.isFramesCycleEnded() && !this.spriteRepeat) {
+  //     this.spritePosition[0] = this.spriteSize[0] * (this.framesAmount - 1);
+  //     //this.setState('stay');
+  //   }
+  // }
 
   setHealthPoints(hp) {
-    // this.healthPoints -= 1;
-    // if (this.healthPoints > 0 && hp > 0) {
-    //   this.setHealthPoints(hp - 11);
-    // }
-    this.healthPoints += hp;
-    if (this.healthPoints < 0) {
-      this.healthPoints = 0;
-    } else if (this.healthPoints > this.maxHealth) {
-      this.healthPoints = this.maxHealth;
-    }
+    if (hp === 0) return;
+    this.healthPoints += hp / Math.abs(hp);
+
+    setTimeout(() => {
+      this.setHealthPoints(hp - hp / Math.abs(hp));
+
+      if (this.healthPoints < 0) {
+        this.healthPoints = 0;
+      } else if (this.healthPoints > this.maxHealth) {
+        this.healthPoints = this.maxHealth;
+      }
+    }, 10)
   }
 }

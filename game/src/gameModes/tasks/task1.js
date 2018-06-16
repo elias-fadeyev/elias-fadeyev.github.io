@@ -1,8 +1,13 @@
-import style from './styles/taskStyle.css';
-
-import { getRandomNumber, getRandomData } from '../randomize';
+import { getRandomNumber } from '../../randomize';
+import { Task } from '.';
   
-export default class Task {
+export default class Task1 extends Task {
+  constructor() {
+    super();
+
+    this.solved = false;
+  }
+  
   createAllElements() {
     this.component = this.createElement('div', 'task-block');
 
@@ -12,15 +17,8 @@ export default class Task {
     
     this.form = this.createElement('form', 'solution');
     this.input = this.createElement('input', 'solution-input');
-  }
-
-  createElement(tag, className, text) {
-    const elem = document.createElement(tag);
-    elem.classList.add(className);
-    if (text) {
-      elem.innerHTML = text;
-    }
-    return elem;
+    
+    this.input.classList.add('num-solution-input');
   }
 
   addHandlers() {
@@ -46,6 +44,8 @@ export default class Task {
       this.component.appendChild(div);
       this.input.setAttribute('disabled', 'disabled');
     }
+    
+    this.solved = true;
 
     e.preventDefault();
   }
@@ -73,37 +73,25 @@ export default class Task {
     this.addHandlers();
   }
 
-  isCorrect() {
-    return this.solution === this.correctSolution;
-  }
-
-  isSolved() {
-    return typeof this.solution === 'number';
-  }
-
-  remove() {
-    this.wrapper.remove();
-  }
-
   init() {
     const operators = ['+', '-', 'x', '&#247;'];
 
     this.operator = operators[getRandomNumber(operators.length)];
 
     if (this.operator === '+') {
-      this.firstNumber = getRandomNumber(200);
-      this.secondNumber = getRandomNumber(200);
+      this.firstNumber = getRandomNumber(100);
+      this.secondNumber = getRandomNumber(100);
       this.correctSolution = this.firstNumber + this.secondNumber;
     } else if (this.operator === '-') {
-      this.firstNumber = getRandomNumber(200);
+      this.firstNumber = getRandomNumber(100);
       this.secondNumber = getRandomNumber(this.firstNumber);
       this.correctSolution = this.firstNumber - this.secondNumber;
     } else if (this.operator === 'x') {
-      this.firstNumber = getRandomNumber(20);
-      this.secondNumber = getRandomNumber(20);
+      this.firstNumber = getRandomNumber(10);
+      this.secondNumber = getRandomNumber(10);
       this.correctSolution = this.firstNumber * this.secondNumber;
     } else {
-      this.secondNumber = getRandomNumber(20, 1);
+      this.secondNumber = getRandomNumber(10, 1);
       this.firstNumber = this.secondNumber * getRandomNumber(20);
       this.correctSolution = this.firstNumber / this.secondNumber;
     }

@@ -4,14 +4,16 @@ export default class Navigation {
   constructor(heading, links = []) {
     this.heading = heading;
     this.links = links;
+
+    this.selectedElementIndex = 0;
   }
 
   addHandlers() {
-    document.addEventListener('click', this.selectElement);
+    document.addEventListener('keydown', this.selectElement);
   }
 
   removeHandlers() {
-    document.removeEventListener('click', this.selectElement);
+    document.removeEventListener('keydown', this.selectElement);
   }
 
   bindThis() {
@@ -19,15 +21,28 @@ export default class Navigation {
   }
 
   selectElement(e) {
-    const target = e.target;
-    const selectedElement = target.closest('.nav-item');
+    const keyCode = e.keyCode;
 
-    if (!selectedElement) return;
+    if (keyCode === 38) {
+      this.selectedElementIndex -= 1;
 
-    this.targetId = target.dataset.id;
+      if (this.selectedElementIndex < 0) {
+        this.selectedElementIndex = this.elements.length - 1;
+      }
+      this.elements[this.selectedElementIndex].focus();
+    } else if (keyCode === 40) {
+      this.selectedElementIndex += 1;
 
-    this.removeHandlers();
-    this.component.remove();
+      if (this.selectedElementIndex > this.elements.length - 1) {
+        this.selectedElementIndex = 0;
+      }
+      this.elements[this.selectedElementIndex].focus();
+    } else if (keyCode === 13) {
+      this.targetId = this.elements[this.selectedElementIndex].dataset.id;
+
+      this.removeHandlers();
+      this.component.remove();
+    }
   }
 
   getTargetId() {
@@ -47,9 +62,12 @@ export default class Navigation {
     const ul = this.createElement('ul', 'nav-list');
 
     this.links.forEach((link, index) => {
-      const li = this.createElement('li', 'nav-item', link);
-      li.innerHTML = link;
-      li.setAttribute('data-id', index + 1);
+      const li = this.createElement('li', 'nav-item');
+      const element = this.createElement('button', 'link-item', link);
+      element.innerHTML = link;
+      element.setAttribute('data-id', index);
+
+      li.appendChild(element);
       ul.appendChild(li);
     })
     
@@ -57,6 +75,10 @@ export default class Navigation {
     div.appendChild(ul);
     this.component.appendChild(div);
     document.body.appendChild(this.component);
+
+    this.elements = this.component.querySelectorAll('.link-item');
+
+    this.elements[this.selectedElementIndex].focus();
   }
 
   createElement(tag, className, text) {

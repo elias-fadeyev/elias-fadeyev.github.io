@@ -25,7 +25,7 @@
 .nav-header {
   font-size: 30px;
   padding: 20px;
-  color: gold;
+  color: #ffd700;
 }
 
 .nav-list {
@@ -37,14 +37,23 @@
   text-align: center;
   margin: 0;
   padding: 0;
-  color: gold;
+}
+
+.link-item {
+  margin: 0;
+  padding: 10px 30px;
+  color: #ffd700;
   font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.link-item:focus {
+  background-color: #aaa;
 }
 
 .nav-item {
-  padding: 10px 30px;
-}
-
-.nav-item:hover {
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
