@@ -83,12 +83,12 @@ export default class Battle extends Mode {
       this.player.setState('stay');
 
       if (this.monster.healthPoints === 0) {
-        this.renderText('Победа!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px serif');
+        this.renderText('Победа!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px "SF Fedora"');
         if (Date.now() - this.time > 2000) {
           this.states['win'] = true;
         } 
       } else if (this.player.healthPoints === 0) {
-        this.renderText('Игра окончена!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px serif');
+        this.renderText('Игра окончена!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px "SF Fedora"');
         if (Date.now() - this.time > 2000) {
           this.states['lose'] = true;
         } 

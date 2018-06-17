@@ -1,7 +1,7 @@
 import { getRandomNumber } from '../../randomize';
 import { Task } from '.';
   
-export default class Task1 extends Task {
+export default class RandomExpressionTask extends Task {
   constructor() {
     super();
 

@@ -1,23 +1,22 @@
-import { getRandomNumber } from '../../randomize';
+import { getRandomNumber, shuffle } from '../../randomize';
 import { Task } from '.';
+import { dictionary } from '.';
 
-export default class Task5 extends Task{
+export default class ChooseTranslateTask extends Task{
   constructor() {
     super();
     
-    this.decimalsAmount = 2;
-    
+    this.choicesAmount = 3;
     this.solved = false;
     
-    this.decimals = {};
-
+    this.choices = [];
     this.buttons = [];
     this.selectedElementIndex = 0;
   }
   
   addHandlers() {
     document.addEventListener('keydown', this.selectElement);
-    this.form.addEventListener('submit', this.submitAnswer); 
+    this.form.addEventListener('submit', this.submitAnswer.bind(this)); 
   }
   
   removeHandlers() {
@@ -27,6 +26,26 @@ export default class Task5 extends Task{
   bindThis() {
     this.selectElement = this.selectElement.bind(this);
     this.submitAnswer = this.submitAnswer.bind(this);
+  }
+
+  
+  createAllElements() {
+    this.component = this.createElement('div', 'task-block');
+
+    this.wrapper = this.createElement('div', 'task-wrapper');
+    this.header = this.createElement('h2', 'task-header', 'Выбери правильный перевод:');
+    this.text = this.createElement('div', 'task-word', `${this.word.original}`);
+
+    this.form = this.createElement('form', 'solution');
+    
+    this.choices.forEach(choice => {
+      const choiceButton = this.createElement('button', 'choice-button');
+      choiceButton.innerHTML = choice;    
+      
+      this.buttons.push(choiceButton);
+      
+      this.form.appendChild(choiceButton);
+    })
   }
   
   selectElement(e) {
@@ -48,29 +67,11 @@ export default class Task5 extends Task{
       this.buttons[this.selectedElementIndex].focus();
     }
   }
-  
-  createAllElements() {
-    this.component = this.createElement('div', 'task-block');
-
-    this.wrapper = this.createElement('div', 'task-wrapper');
-    this.header = this.createElement('h2', 'task-header', 'Выбери большее число:');
-    
-    this.form = this.createElement('form', 'solution');
-    
-    this.values.forEach(value => {
-      const decimalButton = this.createElement('button', 'decimal');
-      decimalButton.innerHTML = `${this.decimals[value][0]} / ${this.decimals[value][1]}`;
-      
-      this.buttons.push(decimalButton);
-      
-      this.form.appendChild(decimalButton);
-    })
-  }
 
   submitAnswer(e) {
     const focusTarget = document.activeElement;
     
-    if (!focusTarget.classList.contains('decimal') || this.isSolved()) {
+    if (!focusTarget.classList.contains('choice-button') || this.isSolved()) {
       e.preventDefault();
       return;
     }
@@ -96,8 +97,9 @@ export default class Task5 extends Task{
   render() {
     this.createAllElements();
 
+    this.text.appendChild(this.form);
     this.component.appendChild(this.header);
-    this.component.appendChild(this.form);
+    this.component.appendChild(this.text);
     this.wrapper.appendChild(this.component);
     document.body.appendChild(this.wrapper);
 
@@ -105,30 +107,29 @@ export default class Task5 extends Task{
     this.addHandlers();
   }
   
-  addDecimals(amount) {
-    let currentAmount = 0;
-    
-    while (currentAmount < amount) {
-      const decimal = [getRandomNumber(10, 1), getRandomNumber(30, 10)];
+  addChoices(number) {
+    while (this.choices.length < number) {
+      const word = dictionary[getRandomNumber(dictionary.length)];
+      const wordTranslate = word.translation.split(',')[0];
       
-      if (this.decimals[decimal[0] / decimal[1]]) {
+      if (wordTranslate === this.correctSolution || this.choices.indexOf(wordTranslate) !== -1) {
         continue;
       }
       
-      this.decimals[decimal[0] / decimal[1]] = decimal;
-      currentAmount++;
+      this.choices.push(wordTranslate);
     }
   }
 
   init() {
-    this.addDecimals(this.decimalsAmount);
+    this.word = dictionary[getRandomNumber(dictionary.length)];
+    this.correctSolution = this.word.translation.split(',')[0];
     
-    this.values = Object.keys(this.decimals);
-    const max = Math.max.apply(null, this.values);
-    this.correctSolution = `${this.decimals[max][0]} / ${this.decimals[max][1]}`;
+    this.addChoices(this.choicesAmount);
+    this.choices.push(this.correctSolution);
+    shuffle(this.choices);
     
-    this.bindThis(); 
-
+    this.bindThis();
+    
     this.render();
   }
 }

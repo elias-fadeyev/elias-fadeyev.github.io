@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "SF Fedora";
+  src: url("../fonts/SFFedora.ttf");
+  font-weight: 800;
+}
+
 * {
   margin: 0;
 }

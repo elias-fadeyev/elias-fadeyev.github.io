@@ -1,12 +1,12 @@
 import style from './styles/taskStyle.css';
 import Task from './taskClass';
-import Task1 from './task1';
-import Task2 from './task2';
-import Task3 from './task3';
-import Task5 from './task5';
-import Task6 from './task6';
+import RandomExpressionTask from './randomExpressionTask';
+import TranslateTask from './translateTask';
+import DragNDropTask from './dragNDropTask';
+import ChooseMaxTask from './chooseMaxTask';
+import ChooseTranslateTask from './chooseTranslateTask';
 import { dictionary } from './dictionary';
 
-const tasks = [Task1, Task2, Task3, Task5, Task6];
+const tasks = [RandomExpressionTask, TranslateTask, DragNDropTask, ChooseMaxTask, ChooseTranslateTask];
 
 export { Task, tasks , dictionary};

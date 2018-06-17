@@ -2,7 +2,7 @@ import { getRandomNumber } from '../../randomize';
 import { Task } from '.';
 import { dictionary } from '.';
   
-export default class Task2 extends Task {
+export default class TranslateTask extends Task {
   constructor() {
     super();
 
