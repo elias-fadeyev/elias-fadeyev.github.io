@@ -29,15 +29,6 @@ export default class Character extends Entity {
     }
   }
 
-  // changeSpritePosition() {
-  //   super.changeSpritePosition();
-
-  //   if (this.isFramesCycleEnded() && !this.spriteRepeat) {
-  //     this.spritePosition[0] = this.spriteSize[0] * (this.framesAmount - 1);
-  //     //this.setState('stay');
-  //   }
-  // }
-
   setHealthPoints(hp) {
     if (hp === 0) return;
     this.healthPoints += hp / Math.abs(hp);

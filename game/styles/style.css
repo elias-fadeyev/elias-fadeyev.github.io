@@ -11,3 +11,73 @@ canvas {
   left: 0;
   right: 0;
 }
+
+.register-wrapper,
+.result-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(100, 100, 100, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-header {
+  font-size: 25px;
+}
+
+.register-block {
+  margin: 0;
+  padding: 0;
+  color: #ffd700;
+  font-size: 20px;
+}
+
+.name-input {
+  text-align: center;
+  border: none;
+  font-size: 18px;
+}
+
+.result-table {
+  margin: 0;
+  padding: 0;
+  color: #ffd700;
+  font-size: 20px;
+  border-collapse: collapse;
+  text-align: center;
+  background-color: #555;
+}
+
+.result-table th,
+.result-table td {
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+.result-table td {
+  color: #ffd700;
+}
+
+.result-header {
+  font-size: 30px;
+  color: #ffd700;
+}
+
+.result-heading {
+  background-color: #ffd700;
+}
+
+.result-heading td {
+  color: #aaa;
+}
+
+.current-score {
+  border: 1px solid #ffd700;
+}

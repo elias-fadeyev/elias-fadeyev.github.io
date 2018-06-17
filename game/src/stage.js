@@ -4,24 +4,39 @@ import { Enemy } from './entities';
 import { Travel } from './gameModes';
 
 export default class Stage {  
-  constructor(canvas, player) {
+  constructor(canvas, player, level) {
     this.canvas = canvas;
+    this.canvasContext = this.canvas.getContext('2d');
     this.player = player;
+    this.level = level;
     this.enemies = [];
   }
 
   render() {
-    this.mode.render();
+    if (!this.mode) {
+      this.finished = true;
+    } else {
+      this.mode.render();
 
-    if (this.mode.isFinished()) {
-      if (this.mode.hasHandlers) {
-        this.mode.removeHandlers();
+      this.renderText(`Уровень ${this.level}`, this.canvas.width / 2, 50, this.canvas.width, '#ffd700', 'center', '32px serif');
+
+      if (this.mode.isFinished()) {
+        if (this.mode.hasHandlers) {
+          this.mode.removeHandlers();
+        }
+        this.mode = this.mode.getNext(this.enemies);
+        if (this.mode) {
+          this.mode.init();
+        }
       }
-      this.mode = this.mode.getNext(this.enemies);
-      this.mode.init();
     }
+  }
 
-    window.requestAnimationFrame(this.render.bind(this));
+  renderText(text, leftPosition, topPosition, maxWidth, color = '#fff', align = 'left', font = '20px serif') {
+    this.canvasContext.font = font;
+    this.canvasContext.fillStyle = color;
+    this.canvasContext.textAlign = align; 
+    this.canvasContext.fillText(text, leftPosition, topPosition, maxWidth);
   }
 
   createMonster(enemyStartPosition) {
@@ -37,7 +52,7 @@ export default class Stage {
   }
 
   isCompleted() {
-    return false;
+    return this.finished;
   }
 
   init() {
@@ -47,7 +62,5 @@ export default class Stage {
 
     this.mode = new Travel(this.canvas, this.player, this.enemies);
     this.mode.init();
-
-    this.render();
   }
 }

@@ -7,7 +7,7 @@ export default class Task3 extends Task {
     super();
 
     this.buttons = [];
-    this.buttonWidth = 30;
+    this.buttonWidth = 50;
     this.currentZIndex = 1;
     this.solved = false;
   }

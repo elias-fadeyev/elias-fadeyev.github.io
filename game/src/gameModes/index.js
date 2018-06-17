@@ -1,5 +1,7 @@
 import Mode from './Mode';
 import Battle from './battleMode';
 import Travel from './travelMode';
+import Register from './register';
+import Result from './result';
 
-export { Battle, Travel, Mode };
+export { Battle, Travel, Mode, Register, Result };

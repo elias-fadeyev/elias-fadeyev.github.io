@@ -72,7 +72,6 @@ export default class Battle extends Mode {
       this.renderEnemySpell();
     } else if (this.states['fatality'] && (Date.now() - this.time > 1000)) {
       //this.player.setState('boom');
-      //this.player.framesPerSecond = 5;
 
       this.spell = null;
       this.cast.active = false;
@@ -80,44 +79,31 @@ export default class Battle extends Mode {
 
       this.states['fatality'] = false;
       this.states['finished'] = true;
-    }  else if (this.states['finished'] && (Date.now() - this.time > 2000)) {
+    }  else if (this.states['finished'] && (Date.now() - this.time > 1000)) {
       this.player.setState('stay');
 
       if (this.monster.healthPoints === 0) {
         this.renderText('Победа!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px serif');
-      //this.playAudio('audio/applause.ogg', '0.1');
-        if (Date.now() - this.time > 3000) {
+        if (Date.now() - this.time > 2000) {
           this.states['win'] = true;
         } 
       } else if (this.player.healthPoints === 0) {
         this.renderText('Игра окончена!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px serif');
-        //this.playAudio('audio/death.mp3', '0.1');
-        if (Date.now() - this.time > 3000) {
+        if (Date.now() - this.time > 2000) {
           this.states['lose'] = true;
         } 
       }
-      //this.states['finished'] = false;
     }
   }
 
   renderCharInfo() {
     const healthPointsScaleWidth = this.canvas.width / 2 - 100;
     
-    this.renderText(this.player.name, 55, 50, healthPointsScaleWidth - 10);     
-    this.renderHealthScale(this.player.healthPoints, healthPointsScaleWidth, 50, 70, this.player.maxHealth);
-    this.renderText(this.player.healthPoints, 55, 90, healthPointsScaleWidth - 10);  
+    super.renderCharInfo(); 
     
     this.renderText(this.monster.getFullName(), this.canvas.width - 55, 50, healthPointsScaleWidth - 10, '#fff', 'right');
     this.renderHealthScale(this.monster.healthPoints, healthPointsScaleWidth, this.canvas.width - healthPointsScaleWidth - 50, 70, this.monster.maxHealth);
     this.renderText(this.monster.healthPoints, this.canvas.width - 55, 90, healthPointsScaleWidth - 10, '#fff', 'right'); 
-  }
-  
-  renderHealthScale(currentHealthPoints, healthPointsScaleWidth, leftPosition, topPosition, maxHealth) {
-    this.canvasContext.fillStyle = '#f00';
-    this.canvasContext.fillRect(leftPosition, topPosition, healthPointsScaleWidth, 30);
-    
-    this.canvasContext.fillStyle = '#080';
-    this.canvasContext.fillRect(leftPosition, topPosition, healthPointsScaleWidth * currentHealthPoints / maxHealth, 30);
   }
 
   renderSpellNav() {
@@ -229,7 +215,7 @@ export default class Battle extends Mode {
       const healedHP = getRandomNumber(30, 20);
       this.player.setHealthPoints(healedHP);
     } else {
-      const missedHP = getRandomNumber(260, 230);
+      const missedHP = getRandomNumber(60, 30);
       enemyHP -= missedHP; 
       this.monster.setHealthPoints(-missedHP);
     }
@@ -269,7 +255,7 @@ export default class Battle extends Mode {
     this.spell.spritePosition = [0, 115];
     this.playAudio('audio/explosion.ogg', '0.5');
 
-    const missedHP = getRandomNumber(130, 110);
+    const missedHP = getRandomNumber(30, 10);
     this.player.setHealthPoints(-missedHP);
 
     this.time = Date.now();
@@ -291,9 +277,10 @@ export default class Battle extends Mode {
   }
 
   getNext(enemies) {
-    const index = enemies.indexOf(this.monster);
-    enemies.splice(index);
-    return new Travel(this.canvas, this.player, enemies);
+    //const index = enemies.indexOf(this.monster);
+    //enemies.splice(index);
+    //return new Travel(this.canvas, this.player, enemies);
+    return null;
   }
   
   init() {
