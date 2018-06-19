@@ -130,7 +130,8 @@
   color: #f00;
 }
 
-.decimal, 
+.decimal,
+.number,
 .choice-button {
   margin: 0;
   padding: 10px 30px;
@@ -141,6 +142,7 @@
 }
 
 .decimal:focus,
+.number:focus,
 .choice-button:focus {
   background-color: #aaa;
 }
@@ -158,6 +160,7 @@
 
 .correct,
 .decimal.correct,
+.number.correct,
 .choice-button.correct {
   background-color: #080;
   color: #fff;
@@ -165,6 +168,7 @@
 
 .wrong,
 .decimal.wrong,
+.number.wrong,
 .choice-button.wrong {
   background-color: #d00;
   color: #fff;
