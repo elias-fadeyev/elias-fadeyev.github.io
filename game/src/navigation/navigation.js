@@ -10,14 +10,17 @@ export default class Navigation {
 
   addHandlers() {
     document.addEventListener('keydown', this.selectElement);
+    document.addEventListener('click', this.clickElement);
   }
 
   removeHandlers() {
     document.removeEventListener('keydown', this.selectElement);
+    document.removeEventListener('click', this.clickElement);
   }
 
   bindThis() {
     this.selectElement = this.selectElement.bind(this);
+    this.clickElement = this.clickElement.bind(this);
   }
 
   selectElement(e) {
@@ -43,6 +46,19 @@ export default class Navigation {
       this.removeHandlers();
       this.component.remove();
     }
+  }
+
+  clickElement(e) {
+    const target = e.target;
+
+    if (!target.classList.contains('link-item')) {
+      return;
+    }
+    
+    this.targetId = target.dataset.id;
+
+    this.removeHandlers();
+    this.component.remove();
   }
 
   getTargetId() {
