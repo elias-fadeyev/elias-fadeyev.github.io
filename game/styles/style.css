@@ -87,3 +87,57 @@ canvas {
 .current-score {
   border: 1px solid #ffd700;
 }
+
+.loader {
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+}
+
+.loader-elem {
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  box-shadow: 2px 2px 3px rgba(0,0,0,.4);
+  animation: run 2s infinite ease-in-out;
+}
+
+.one {
+  background: #F3B222;
+  animation-delay: 1.5s;
+}
+.two {
+  background: #F0653E;
+  animation-delay: 1s;
+}
+.three {
+  background: #B9C0C0;
+  animation-delay: 0.5s;
+}
+.four {
+  background: #8F7473;
+}
+
+@keyframes run {
+  0% {
+    transform: translate(0%);
+    border-radius: 50%;
+  }
+  25% {
+    transform: translate(150%) scale(0.5); 
+    border-radius: 0%;
+  }
+  50% {
+    transform: translate(150%, 150%);
+    border-radius: 50%; 
+  }
+  75% {
+    transform: translate(0%, 150%) scale(0.5); 
+    border-radius: 0%;
+  }
+}

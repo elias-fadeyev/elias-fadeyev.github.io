@@ -83,7 +83,7 @@ class Game {
       this.stage = null;
     } else if (this.isGameOver() && !this.resultWindow) {
       const img = new Image();
-      img.src = 'images/start-bg2.jpg';
+      img.src = 'images/record-bg.jpg';
       const audio = new Audio('audio/death.mp3');
       audio.volume = 0.3;
       audio.play();
@@ -110,6 +110,7 @@ class Game {
   }
 }
 
+const loader = document.querySelector('#loader');
 const canvas = document.querySelector('#gameCanvas');
 const game = new Game(canvas);
 
@@ -124,7 +125,8 @@ resources.load([
     'images/breath.png',
     'images/heal.png',
     'images/start-bg.jpg',
-    'images/start-bg2.jpg',
+    'images/record-bg.jpg',
 ]);
 
 resources.onReady(game.init.bind(game));
+resources.onReady(() => {loader.style.display='none'});
