@@ -34,7 +34,7 @@ const spells = new Map([
     'name': 'Лечение',
     'heal': true,
     'url': 'images/heal.png',
-    'audio': 'audio/heal.ogg',
+    'audio': 'audio/applause.ogg',
     'imageSize': [120, 120],
     'spriteSize': [60, 60],
     'firstSpritePosition': [0, 0],
