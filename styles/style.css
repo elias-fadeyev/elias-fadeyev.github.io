@@ -41,6 +41,7 @@ nav li {
 
 .nav-link:hover {
   cursor: pointer;
+  color: #333;
 }
 
 h1,
@@ -102,11 +103,16 @@ section:nth-child(2n) {
   color: #ffd700;
 }
 
+.game-link:hover {
+  color: #333;
+}
+
 .author {
   justify-content: center;
 }
 
-.author-name {
+.author-name,
+.start-section_text {
   display: grid;
   justify-content: center;
   align-content: center;
