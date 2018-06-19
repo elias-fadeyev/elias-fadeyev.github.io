@@ -46,7 +46,7 @@ export default class Battle extends Mode {
 
     if (this.states['playerTurn'] && (Date.now() - this.time > 1000)) {
       this.renderPlayerTurn();
-    } else if (this.states['playerCast'] && (Date.now() - this.time > 500)) {
+    } else if (this.states['playerCast'] && (Date.now() - this.time > 1000)) {
       this.renderSpellCast();
     } else if (this.states['playerSpell'] && (Date.now() - this.time > 800)) {
       this.renderSpell();
