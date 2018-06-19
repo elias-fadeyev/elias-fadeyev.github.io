@@ -1,5 +1,5 @@
-import { getRandomNumber, shuffle } from '../../randomize';
-import { Task } from '.';
+import { getRandomNumber, shuffle } from '../../../randomize';
+import { Task } from '../';
 import { dictionary } from '.';
 
 export default class DragNDropTask extends Task {

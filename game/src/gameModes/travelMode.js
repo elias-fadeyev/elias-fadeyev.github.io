@@ -23,6 +23,27 @@ export default class Travel extends Mode {
     this.player.clearCache();
   }
 
+  render() {
+    super.render();
+
+    this.enemies.forEach(enemy => {
+      const leftPosition = enemy.imagePosition[0] + enemy.imageWidth / 2;
+      const topPosition = enemy.imagePosition[1] - enemy.imageHeight / 2;
+
+      let text = '';
+      if (enemy.taskTheme === 'math') {
+        text = 'Математика';
+      } else {
+        text = 'Английский';
+      }
+
+      this.canvasContext.fillStyle = 'rgba(0, 0, 0, 0.5)';
+      this.canvasContext.fillRect(leftPosition - 55, topPosition - 40, enemy.imageWidth * 1.5, 30);
+
+      this.renderText(text, leftPosition, topPosition - 20, enemy.imageWidth * 1.5, '#fff', 'center', '16px serif');
+    })
+  }
+
   isFinished() {
     const playerLeft = this.player.imagePosition[0];
     const playerRight = this.player.imagePosition[0] + this.player.imageWidth;

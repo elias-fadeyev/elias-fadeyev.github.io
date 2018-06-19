@@ -1,5 +1,5 @@
-import { getRandomNumber } from '../../randomize';
-import { Task } from '.';
+import { getRandomNumber } from '../../../randomize';
+import { Task } from '../';
 import { dictionary } from '.';
   
 export default class TranslateTask extends Task {

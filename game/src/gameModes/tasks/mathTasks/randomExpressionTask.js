@@ -1,5 +1,5 @@
-import { getRandomNumber } from '../../randomize';
-import { Task } from '.';
+import { getRandomNumber } from '../../../randomize';
+import { Task } from '../';
   
 export default class RandomExpressionTask extends Task {
   constructor() {

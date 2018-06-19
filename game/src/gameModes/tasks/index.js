@@ -1,12 +1,7 @@
 import style from './styles/taskStyle.css';
 import Task from './taskClass';
-import RandomExpressionTask from './randomExpressionTask';
-import TranslateTask from './translateTask';
-import DragNDropTask from './dragNDropTask';
-import ChooseMaxTask from './chooseMaxTask';
-import ChooseTranslateTask from './chooseTranslateTask';
-import { dictionary } from './dictionary';
+import { mathTasks } from './mathTasks';
+import { englishTasks } from './englishTasks';
 
-const tasks = [RandomExpressionTask, TranslateTask, DragNDropTask, ChooseMaxTask, ChooseTranslateTask];
-
-export { Task, tasks , dictionary};
+export { Task };
+export { mathTasks, englishTasks };

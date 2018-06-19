@@ -1,11 +1,13 @@
 import Character from './characterClass';
 
 export default class Enemy extends Character {
-  constructor(...args) {
+  constructor(taskTheme, ...args) {
     super(...args);
     this.imageReverse = true;
     this.spriteDirectionChangeable = true;
     this.maxHealth = this.healthPoints;
+
+    this.taskTheme = taskTheme;
   }
 
   getFullName() {

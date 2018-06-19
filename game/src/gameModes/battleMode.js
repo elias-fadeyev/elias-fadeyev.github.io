@@ -1,6 +1,6 @@
 import { Navigation } from '../navigation'
 import { Mode, Travel } from './';
-import { tasks } from './tasks';
+import { mathTasks, englishTasks } from './tasks';
 import { getRandomNumber } from '../randomize';
 import { spells, castSpell } from '../constants';
 import { Spell } from '../entities';
@@ -83,12 +83,12 @@ export default class Battle extends Mode {
       this.player.setState('stay');
 
       if (this.monster.healthPoints === 0) {
-        this.renderText('Победа!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px "SF Fedora"');
+        this.renderText('Победа!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px serif');
         if (Date.now() - this.time > 2000) {
           this.states['win'] = true;
         } 
       } else if (this.player.healthPoints === 0) {
-        this.renderText('Игра окончена!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px "SF Fedora"');
+        this.renderText('Игра окончена!', this.canvas.width / 2, this.canvas.height / 2, this.canvas.width, '#ffd700', 'center', '32px serif');
         if (Date.now() - this.time > 2000) {
           this.states['lose'] = true;
         } 
@@ -112,7 +112,13 @@ export default class Battle extends Mode {
   }
 
   renderTaskWindow() {
-    const CurrentTask = tasks[getRandomNumber(tasks.length)];
+    let CurrentTask;
+    
+    if (this.monster.taskTheme === 'math') {
+      CurrentTask = mathTasks[getRandomNumber(mathTasks.length)];
+    } else {
+      CurrentTask = englishTasks[getRandomNumber(englishTasks.length)];
+    }
 
     this.task = new CurrentTask();
     this.task.init();

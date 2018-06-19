@@ -1,4 +1,4 @@
-import Mode from './Mode';
+import Mode from './mode';
 import Battle from './battleMode';
 import Travel from './travelMode';
 import Register from './register';

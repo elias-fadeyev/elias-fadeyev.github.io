@@ -16,7 +16,7 @@ function getRandomData(dataObject) {
 function shuffle(array) {
   const length = array.length;
   array.forEach((item, i) => {
-    const random = Math.floor(Math.random() * length);
+    const random = getRandomNumber(length);
     [array[i], array[random]] = [array[random], array[i]];
   });
 }

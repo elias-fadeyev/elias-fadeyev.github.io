@@ -39,14 +39,14 @@ export default class Stage {
     this.canvasContext.fillText(text, leftPosition, topPosition, maxWidth);
   }
 
-  createMonster(enemyStartPosition) {
+  createMonster(enemyStartPosition, taskTheme) {
     const enemyAppearance = getRandomData(enemyAppearances);
     const enemyHealth = getRandomNumber(150, 100);
     const currentEnemyState = enemyStates.get('stay');
     const enemyPartWidth = currentEnemyState.imageSize[0];
     const enemyPartHeight = currentEnemyState.imageSize[1];
 
-    const monster = new Enemy(getRandomData(enemyNames), enemyAppearance, enemyHealth, this.canvas, 'images/enemy-sprite.png', enemyStartPosition, currentEnemyState, currentEnemyState.action, enemyPartWidth, enemyPartHeight, currentEnemyState.animationDelay,  currentEnemyState.repeat, currentEnemyState.spriteSize);
+    const monster = new Enemy(taskTheme, getRandomData(enemyNames), enemyAppearance, enemyHealth, this.canvas, 'images/enemy-sprite.png', enemyStartPosition, currentEnemyState, currentEnemyState.action, enemyPartWidth, enemyPartHeight, currentEnemyState.animationDelay,  currentEnemyState.repeat, currentEnemyState.spriteSize);
 
     this.enemies.push(monster);
   }
@@ -56,9 +56,9 @@ export default class Stage {
   }
 
   init() {
-    this.createMonster([(this.canvas.width - getRandomNumber(150, 130)), (this.canvas.height - getRandomNumber(200, 200))]);
+    this.createMonster([(this.canvas.width - getRandomNumber(150, 130)), (this.canvas.height - getRandomNumber(200, 200))], 'math');
 
-    this.createMonster([(this.canvas.width - getRandomNumber(440, 420)), (this.canvas.height - getRandomNumber(235, 225))]);
+    this.createMonster([(this.canvas.width - getRandomNumber(440, 420)), (this.canvas.height - getRandomNumber(235, 225))], 'english');
 
     this.mode = new Travel(this.canvas, this.player, this.enemies);
     this.mode.init();
