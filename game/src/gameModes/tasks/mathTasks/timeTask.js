@@ -97,7 +97,10 @@ export default class TimeTask extends Task {
       
       this.renderTimeText(this.correctTime);
       
-      const div = this.createElement('div', 'solution-wrong', `Неправильно! Правильный ответ: ${this.correctTime.days} ${this.daysText} ${this.correctTime.hours} ${this.hoursText} ${this.correctTime.minutes} ${this.minutesText}`);
+      const div = this.createElement('div', 'solution-wrong', 'Неправильно! Правильный ответ: ');
+      const divCorrectAnswers = this.createElement('div', 'solution-wrong', `${this.correctTime.days} ${this.daysText} ${this.correctTime.hours} ${this.hoursText} ${this.correctTime.minutes} ${this.minutesText}`);
+
+      div.appendChild(divCorrectAnswers);
       this.component.appendChild(div);
     }
 
