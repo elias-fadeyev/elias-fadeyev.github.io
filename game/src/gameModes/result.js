@@ -36,7 +36,10 @@ export default class Result {
       this.table.appendChild(row);
     });
 
+    const text = this.createElement('div', 'result-text', 'Нвжми любую клавишу, чтобы начать сначала');
+
     this.wrapper.appendChild(this.table);
+    this.wrapper.appendChild(text);
     document.body.appendChild(this.wrapper);
   }
 

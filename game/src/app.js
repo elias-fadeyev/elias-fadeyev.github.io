@@ -21,11 +21,14 @@ class Game {
     this.music = new Audio('audio/main-theme.mp3');
     this.music.volume = 0.5;
     this.music.play();
-  
-    document.addEventListener('submit', this.submitName.bind(this));
+
+    this.submitName = this.submitName.bind(this);
+    document.addEventListener('submit', this.submitName);
   }
 
   submitName(e) {
+    document.removeEventListener('submit', this.submitName);
+
     this.name = this.registerWindow.getName();
 
     this.registerWindow.remove();
@@ -60,13 +63,13 @@ class Game {
   }
 
   restartGame() {
+    document.removeEventListener('keydown', this.restartGame);
+
     this.resultWindow.remove();
     this.resultWindow = null;
 
     this.clearInfo();
     this.showRegister();
-
-    document.removeEventListener('keydown', this.restartGame);
   }
 
   render() {

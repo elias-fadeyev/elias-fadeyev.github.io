@@ -38,7 +38,8 @@ canvas {
   font-size: 25px;
 }
 
-.register-block {
+.register-block,
+.result-text {
   margin: 0;
   padding: 0;
   color: #ffd700;
