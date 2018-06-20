@@ -29,9 +29,9 @@ const spells = new Map([
     'animationDelay': 0,
     'repeat': true,
   }],
-  ['Лечение', {
+  ['Божественный удар', {
     'id': 2,
-    'name': 'Лечение',
+    'name': 'Божественный удар',
     'heal': true,
     'url': 'images/heal.png',
     'audio': 'audio/applause.ogg',
