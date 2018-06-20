@@ -162,7 +162,7 @@ export default class Battle extends Mode {
       } else if (this.spellNav.targetId === '1') {
         this.cast.move([this.monster.imagePosition[0] + this.monster.imageWidth / 2 - this.cast.imageWidth - 2 + 30, 180]);
       } else if (this.spellNav.targetId === '2') {
-        this.cast.move([this.canvas.width / 2, -100]);
+        setTimeout(() => {this.cast.move([this.canvas.width / 2, -100])}, 300);
       } 
 
       this.playAudio('audio/kick.ogg', '0.3');

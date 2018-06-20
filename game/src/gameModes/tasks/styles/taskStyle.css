@@ -31,6 +31,7 @@
   font-size: 30px;
   padding: 10px;
   color: #ffd700;
+  max-width: 500px;
 }
 
 .task-text {
@@ -39,7 +40,7 @@
   align-items: stretch;
   text-align: center;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   color: #ffd700;
   font-size: 20px;
 }
@@ -52,6 +53,10 @@
 }
 
 .num-solution-input {
+  margin: 0 10px;
+  text-align: center;
+  border: none;
+  font-size: 18px;
   width: 50px;
 }
 
@@ -175,4 +180,15 @@
 .choice-button.wrong {
   background-color: #d00;
   color: #fff;
+}
+
+.input-label {
+  margin: 20px 5px;
+  padding: 0;
+  color: #ffd700;
+  font-size: 20px;
+}
+
+.submit-button {
+  display: none;
 }
