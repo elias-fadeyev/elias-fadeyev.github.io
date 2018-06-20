@@ -1,8 +1,8 @@
 export default class Entity {
-  constructor(canvas, url, imageWidth, imageHeight, imagePosition, spriteSize, spritePosition, animationDelay = 0, framesAmount = 1, spriteRepeat = true) {
+  constructor(canvas, urlRes, imageWidth, imageHeight, imagePosition, spriteSize, spritePosition, animationDelay = 0, framesAmount = 1, spriteRepeat = true) {
     this.canvas = canvas;
     this.canvasContext = this.canvas.getContext('2d');
-    this.url = url;
+    this.urlRes = urlRes;
     this.imageWidth = imageWidth;
     this.imageHeight = imageHeight;
     this.imagePosition = imagePosition;
@@ -23,9 +23,6 @@ export default class Entity {
   }
   
   renderImage() {
-    const img = new Image();
-    img.src = this.url;
-    
     this.delayInterval = this.getTimeInterval(this.startWaitingTime, Date.now());
 
     if (this.isMoving) {      
@@ -43,7 +40,8 @@ export default class Entity {
     if (this.imageReverse) {
       this.canvasContext.scale(-1, 1);
     }
-    this.canvasContext.drawImage(img, 
+
+    this.canvasContext.drawImage(this.urlRes, 
       this.spritePosition[0], this.spritePosition[1], 
       this.spriteSize[0], this.spriteSize[1], 
       this.getImageXPosition(), this.imagePosition[1], 

@@ -67,7 +67,7 @@ export default class Travel extends Mode {
   getNext() {
     const attackedMonster = this.attackedMonster;
     this.attackedMonster = null;
-    return new Battle(this.canvas, this.player, attackedMonster);
+    return new Battle(this.canvas, this.resources, this.player, attackedMonster);
   }
 
   init() {

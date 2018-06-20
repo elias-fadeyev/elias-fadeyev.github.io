@@ -5,16 +5,15 @@ import Resources from './resources';
 import { Result, Register } from './gameModes';
 
 class Game {
-  constructor(canvas) {
+  constructor(canvas, resources) {
     this.canvas = canvas;
     this.canvasContext = canvas.getContext('2d');
+    this.resources = resources;
     this.level = 1;
   }
 
   showRegister() {
-    const img = new Image();
-    img.src = 'images/start-bg.jpg';
-    this.canvasContext.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+    this.canvasContext.drawImage(this.resources.get('images/start-bg.jpg'), 0, 0, this.canvas.width, this.canvas.height);
 
     if (!this.registerWindow) {
       this.registerWindow = new Register();
@@ -35,7 +34,7 @@ class Game {
       const currentState = heroStates.get('stay');
       const healthPoints = 100;
 
-      this.player = new Player(this.name, 'Scrooge', healthPoints, this.canvas, 'images/hero-sprite.png', playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.repeat, currentState.spriteSize, currentState.firstSpritePosition, currentState.framesAmount);
+      this.player = new Player(this.name, 'Scrooge', healthPoints, this.canvas, this.resources.get('images/hero-sprite.png'), playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.repeat, currentState.spriteSize, currentState.firstSpritePosition, currentState.framesAmount);
 
       window.cancelAnimationFrame(this.loop);
       
@@ -73,7 +72,7 @@ class Game {
 
   render() {
     if (!this.stage) {
-      this.stage = new Stage(this.canvas, this.player, this.level);
+      this.stage = new Stage(this.canvas, this.resources, this.player, this.level);
       this.stage.init();
       const audio = new Audio('audio/start-stage.mp3');
       audio.volume = 0.3;
@@ -82,13 +81,11 @@ class Game {
       this.level += 1;
       this.stage = null;
     } else if (this.isGameOver() && !this.resultWindow) {
-      const img = new Image();
-      img.src = 'images/record-bg.jpg';
       const audio = new Audio('audio/death.mp3');
       audio.volume = 0.3;
       audio.play();
 
-      this.canvasContext.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+      this.canvasContext.drawImage(this.resources.get('images/record-bg.jpg'), 0, 0, this.canvas.width, this.canvas.height);
 
       this.resultWindow = new Result(this.player.name, this.level);
       this.resultWindow.init();
@@ -112,9 +109,9 @@ class Game {
 
 const loader = document.querySelector('#loader');
 const canvas = document.querySelector('#gameCanvas');
-const game = new Game(canvas);
 
 const resources = new Resources();
+const game = new Game(canvas, resources);
 
 resources.load([
     'images/hero-sprite.png',

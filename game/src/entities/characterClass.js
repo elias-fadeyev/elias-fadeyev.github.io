@@ -1,8 +1,8 @@
 import Entity from './entityClass';
 
 export default class Character extends Entity {
-  constructor (name, appearance, healthPoints, canvas, url, imagePosition, state, stateAction, imageWidth, imageHeight, animationDelay, spriteRepeat, spriteSize, spritePosition, framesAmount) {
-    super(canvas, url, imageWidth, imageHeight, imagePosition, spriteSize, spritePosition, animationDelay, framesAmount, spriteRepeat);
+  constructor (name, appearance, healthPoints, canvas, urlRes, imagePosition, state, stateAction, imageWidth, imageHeight, animationDelay, spriteRepeat, spriteSize, spritePosition, framesAmount) {
+    super(canvas, urlRes, imageWidth, imageHeight, imagePosition, spriteSize, spritePosition, animationDelay, framesAmount, spriteRepeat);
     this.name = name;
     this.appearance = appearance;
     this.state = state;

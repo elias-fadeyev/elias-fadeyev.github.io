@@ -1,7 +1,8 @@
 export default class Mode {
-  constructor(canvas, player, enemies = []) {
+  constructor(canvas, resources, player, enemies = []) {
     this.canvas = canvas;
     this.canvasContext = this.canvas.getContext('2d');
+    this.resources = resources;
     this.player = player;
     this.enemies = enemies;
     this.hasHandlers = false;
@@ -27,9 +28,7 @@ export default class Mode {
   }
 
   renderBackground() {
-    const img = new Image();
-    img.src = 'images/bg.jpg';
-    this.canvasContext.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+    this.canvasContext.drawImage(this.resources.get('images/bg.jpg'), 0, 0, this.canvas.width, this.canvas.height);
   }
 
   renderText(text, leftPosition, topPosition, maxWidth, color = '#fff', align = 'left', font = '20px serif') {

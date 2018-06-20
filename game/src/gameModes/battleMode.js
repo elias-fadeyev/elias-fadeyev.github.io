@@ -6,8 +6,8 @@ import { spells, castSpell } from '../constants';
 import { Spell } from '../entities';
 
 export default class Battle extends Mode {
-  constructor(canvas, player, monster) {
-    super(canvas, player, [monster]);
+  constructor(canvas, resources, player, monster) {
+    super(canvas, resources, player, [monster]);
     
     this.time = Date.now();
 
@@ -213,7 +213,7 @@ export default class Battle extends Mode {
 
     this.playAudio(spell.audio, '0.5');
     
-    this.spell = new Spell(spell.heal, spell.speed, this.canvas, spell.url, spell.imageSize[0], spell.imageSize[1], imagePosition, spell.spriteSize, spell.firstSpritePosition, spell.animationDelay, spell.framesAmount, spell.repeat);
+    this.spell = new Spell(spell.heal, spell.speed, this.canvas, this.resources.get(spell.url), spell.imageSize[0], spell.imageSize[1], imagePosition, spell.spriteSize, spell.firstSpritePosition, spell.animationDelay, spell.framesAmount, spell.repeat);
 
     let enemyHP = this.monster.healthPoints;
     
@@ -247,7 +247,7 @@ export default class Battle extends Mode {
   renderEnemyCast() {
     const spell = spells.get(this.spells[0]);
 
-    this.spell = new Spell(spell.heal, spell.speed, this.canvas, spell.url, spell.imageSize[0], spell.imageSize[1], [this.monster.imagePosition[0] + this.monster.imageWidth - spell.imageSize[0] / 2, this.monster.imagePosition[1] - this.monster.imageHeight / 2], spell.spriteSize, [0, 0], spell.animationDelay, spell.framesAmount, spell.repeat);
+    this.spell = new Spell(spell.heal, spell.speed, this.canvas, this.resources.get(spell.url), spell.imageSize[0], spell.imageSize[1], [this.monster.imagePosition[0] + this.monster.imageWidth - spell.imageSize[0] / 2, this.monster.imagePosition[1] - this.monster.imageHeight / 2], spell.spriteSize, [0, 0], spell.animationDelay, spell.framesAmount, spell.repeat);
 
     this.spell.move([this.player.imagePosition[0] + this.player.imageWidth / 2 - this.spell.imageWidth / 2, this.player.imagePosition[1]]);
 
@@ -303,7 +303,7 @@ export default class Battle extends Mode {
 
     const castSpeed = currentCast.speed;
 
-    this.cast = new Spell(false, castSpeed, this.canvas, currentCast.url, currentCast.imageSize[0], currentCast.imageSize[1], castImagePosition, currentCast.spriteSize, currentCast.firstSpritePosition, currentCast.animationDelay, currentCast.framesAmount, currentCast.repeat);
+    this.cast = new Spell(false, castSpeed, this.canvas, this.resources.get(currentCast.url), currentCast.imageSize[0], currentCast.imageSize[1], castImagePosition, currentCast.spriteSize, currentCast.firstSpritePosition, currentCast.animationDelay, currentCast.framesAmount, currentCast.repeat);
 
     this.cast.active = true;
   }
