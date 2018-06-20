@@ -16,7 +16,7 @@ export default class Register {
     
     this.form = this.createElement('form', 'form');
     this.input = this.createElement('input', 'name-input');
-    this.input.required = true;
+    this.input.placeholder = 'Скрудж';
   }
 
   addHandlers() {
@@ -24,7 +24,7 @@ export default class Register {
   }
 
   submitAnswer(e) {
-    this.name = this.input.value;
+    this.name = this.input.value || 'Скрудж';
 
     e.preventDefault();
   }
