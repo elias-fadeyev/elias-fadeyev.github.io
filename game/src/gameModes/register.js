@@ -19,17 +19,8 @@ export default class Register {
     this.input.placeholder = 'Скрудж';
   }
 
-  addHandlers() {
-    this.form.addEventListener('submit', this.submitAnswer.bind(this)); 
-  }
-
-  submitAnswer(e) {
-    this.name = this.input.value || 'Скрудж';
-
-    e.preventDefault();
-  }
-
   getName() {
+    this.name = this.input.value || 'Скрудж';
     return this.name;
   }
 
@@ -47,7 +38,6 @@ export default class Register {
     document.body.appendChild(this.wrapper);
 
     this.input.focus();
-    this.addHandlers();
   }
 
   init() {

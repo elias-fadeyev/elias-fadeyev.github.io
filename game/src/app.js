@@ -15,34 +15,33 @@ class Game {
   showRegister() {
     this.canvasContext.drawImage(this.resources.get('images/start-bg.jpg'), 0, 0, this.canvas.width, this.canvas.height);
 
-    if (!this.registerWindow) {
-      this.registerWindow = new Register();
-      this.registerWindow.init();
+    this.registerWindow = new Register();
+    this.registerWindow.init();
 
-      this.music = new Audio('audio/main-theme.mp3');
-      this.music.volume = 0.5;
-      this.music.play();
-    } else if (this.registerWindow.getName()) {
-      this.name = this.registerWindow.getName();
+    this.music = new Audio('audio/main-theme.mp3');
+    this.music.volume = 0.5;
+    this.music.play();
+  
+    document.addEventListener('submit', this.submitName.bind(this));
+  }
 
-      this.registerWindow.remove();
-      this.registerWindow = null;
+  submitName(e) {
+    this.name = this.registerWindow.getName();
 
-      this.music.pause();
+    this.registerWindow.remove();
+    this.registerWindow = null;
 
-      const playerStartPosition = [100, (this.canvas.height - 160)];
-      const currentState = heroStates.get('stay');
-      const healthPoints = 100;
+    this.music.pause();
 
-      this.player = new Player(this.name, 'Scrooge', healthPoints, this.canvas, this.resources.get('images/hero-sprite.png'), playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.repeat, currentState.spriteSize, currentState.firstSpritePosition, currentState.framesAmount);
+    const playerStartPosition = [100, (this.canvas.height - 160)];
+    const currentState = heroStates.get('stay');
+    const healthPoints = 100;
 
-      window.cancelAnimationFrame(this.loop);
-      
-      this.startGame();
-      return;
-    }
+    this.player = new Player(this.name, 'Scrooge', healthPoints, this.canvas, this.resources.get('images/hero-sprite.png'), playerStartPosition, currentState, currentState.action, currentState.imageSize[0], currentState.imageSize[1], currentState.animationDelay, currentState.repeat, currentState.spriteSize, currentState.firstSpritePosition, currentState.framesAmount);
 
-    this.loop = window.requestAnimationFrame(this.showRegister.bind(this));
+    this.startGame();
+
+    e.preventDefault();
   }
 
   startGame() {
