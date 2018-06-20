@@ -69,7 +69,7 @@ class Game {
     this.resultWindow = null;
 
     this.clearInfo();
-    this.showRegister();
+    setTimeout(() => { this.showRegister() }, 100);
   }
 
   render() {
